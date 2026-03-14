@@ -38,20 +38,27 @@
 =IS_VALID_POSTAL_CODE("123-456")         -> FALSE
 ```
 
-## Apps Script プロジェクト
+## サンプル Google Sheets
 
-| 環境 | リンク                                                                                                              |
-| ---- | ------------------------------------------------------------------------------------------------------------------- |
-| dev  | [custom-functions-dev](https://script.google.com/d/1tu6F2RRcjnmmeA-5GyRTD51eXOO6O7qlEuNSe9jr48H_T8ehUV1aQN00/edit)  |
-| prod | [custom-functions-prod](https://script.google.com/d/1gXPZE_wfAOXPLG6-gpoS5pB7w4Vwe3ERtk6NF14oLh1a_K6Ocm9I1l4I/edit) |
+カスタム関数はコンテナバインドスクリプトでのみ動作します。Apps Script プロジェクトはスプレッドシート内から作成する必要があります。以下の dev/prod スクリプトはこのスプレッドシートに紐づいています:
+
+| リソース           | リンク                                                                                                              |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------- |
+| Google Sheets      | [custom-functions-sample](https://docs.google.com/spreadsheets/d/1yE2ILYjS1QvAs5i8Kl0-B8yrydAThFi62lF0rATQ-0I/edit) |
+| Apps Script (dev)  | [custom-functions-dev](https://script.google.com/d/1tu6F2RRcjnmmeA-5GyRTD51eXOO6O7qlEuNSe9jr48H_T8ehUV1aQN00/edit)  |
+| Apps Script (prod) | [custom-functions-prod](https://script.google.com/d/1gXPZE_wfAOXPLG6-gpoS5pB7w4Vwe3ERtk6NF14oLh1a_K6Ocm9I1l4I/edit) |
 
 ## クイックスタート
 
-### 1. Google Apps Script プロジェクトの作成
+### 1. Google Sheets でスプレッドシートを作成
 
-[Google Apps Script](https://script.google.com) を開く → 新しいプロジェクトを作成 → プロジェクト URL から `scriptId` をコピー。
+新しいスプレッドシートを Google Sheets で作成します。カスタム関数はこのスプレッドシートで利用可能になります。
 
-### 2. clasp の設定
+### 2. コンテナバインドスクリプトの作成
+
+スプレッドシートを開く → **拡張機能** → **Apps Script**。スプレッドシートに紐づいた Apps Script プロジェクトが作成されます。プロジェクト URL（`https://script.google.com/d/<scriptId>/edit`）から `scriptId` をコピーします。
+
+### 3. clasp の設定
 
 `.clasp-dev.json` と `.clasp-prod.json` に `scriptId` を設定:
 
@@ -59,13 +66,15 @@
 { "scriptId": "YOUR_SCRIPT_ID_HERE" }
 ```
 
-### 3. CI/CD シークレットの設定
+dev / prod で同じスプレッドシートを共有できます。同一の `scriptId` を使うか、環境ごとに分けるかは任意です。
+
+### 4. CI/CD シークレットの設定
 
 `CLASPRC_JSON` シークレットを GitHub リポジトリまたは Org レベルに設定。
 
-### 4. デプロイ
+### 5. デプロイ
 
-`pnpm run deploy` で dev 環境にデプロイ。
+`pnpm run deploy` で dev 環境にデプロイ。カスタム関数は紐づけたスプレッドシートで利用可能になります。
 
 ## プロジェクト構成
 

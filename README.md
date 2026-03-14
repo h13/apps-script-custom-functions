@@ -38,20 +38,27 @@ Enter the following formulas in spreadsheet cells:
 =IS_VALID_POSTAL_CODE("123-456")         -> FALSE
 ```
 
-## Apps Script Projects
+## Sample Google Sheets
 
-| Environment | Link                                                                                                                |
-| ----------- | ------------------------------------------------------------------------------------------------------------------- |
-| dev         | [custom-functions-dev](https://script.google.com/d/1tu6F2RRcjnmmeA-5GyRTD51eXOO6O7qlEuNSe9jr48H_T8ehUV1aQN00/edit)  |
-| prod        | [custom-functions-prod](https://script.google.com/d/1gXPZE_wfAOXPLG6-gpoS5pB7w4Vwe3ERtk6NF14oLh1a_K6Ocm9I1l4I/edit) |
+Custom functions require a container-bound script — the Apps Script project must be created from within the Google Sheets spreadsheet. The dev/prod scripts below are bound to this spreadsheet:
+
+| Resource           | Link                                                                                                                |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------- |
+| Google Sheets      | [custom-functions-sample](https://docs.google.com/spreadsheets/d/1yE2ILYjS1QvAs5i8Kl0-B8yrydAThFi62lF0rATQ-0I/edit) |
+| Apps Script (dev)  | [custom-functions-dev](https://script.google.com/d/1tu6F2RRcjnmmeA-5GyRTD51eXOO6O7qlEuNSe9jr48H_T8ehUV1aQN00/edit)  |
+| Apps Script (prod) | [custom-functions-prod](https://script.google.com/d/1gXPZE_wfAOXPLG6-gpoS5pB7w4Vwe3ERtk6NF14oLh1a_K6Ocm9I1l4I/edit) |
 
 ## Quick Start
 
-### 1. Create a Google Apps Script Project
+### 1. Create a Google Sheets Spreadsheet
 
-Open [Google Apps Script](https://script.google.com) → create a new project → copy the `scriptId` from the project URL.
+Create a new spreadsheet in Google Sheets. Custom functions will be available in this spreadsheet.
 
-### 2. Configure clasp
+### 2. Create a Container-Bound Script
+
+Open the spreadsheet → **Extensions** → **Apps Script**. This creates an Apps Script project bound to the spreadsheet. Copy the `scriptId` from the project URL (`https://script.google.com/d/<scriptId>/edit`).
+
+### 3. Configure clasp
 
 Set the `scriptId` in `.clasp-dev.json` and `.clasp-prod.json`:
 
@@ -59,13 +66,15 @@ Set the `scriptId` in `.clasp-dev.json` and `.clasp-prod.json`:
 { "scriptId": "YOUR_SCRIPT_ID_HERE" }
 ```
 
-### 3. Set CI/CD Secret
+Dev and prod can share a single spreadsheet — use the same `scriptId` or separate ones as needed.
+
+### 4. Set CI/CD Secret
 
 Set the `CLASPRC_JSON` secret in your GitHub repository or at the organization level.
 
-### 4. Deploy
+### 5. Deploy
 
-Run `pnpm run deploy` to deploy to the dev environment.
+Run `pnpm run deploy` to deploy to the dev environment. The custom functions become available in the bound spreadsheet.
 
 ## Project Structure
 
