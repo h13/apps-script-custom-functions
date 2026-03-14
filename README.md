@@ -1,22 +1,24 @@
-# apps-script-custom-functions
+# Google Sheets Custom Functions
 
 [![CI](https://github.com/h13/apps-script-custom-functions/actions/workflows/ci.yml/badge.svg)](https://github.com/h13/apps-script-custom-functions/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/h13/apps-script-custom-functions/blob/main/LICENSE)
 [![Node.js](https://img.shields.io/badge/Node.js-%3E%3D24-green.svg)](https://nodejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-blue.svg)](https://www.typescriptlang.org/)
-[![Google Apps Script](https://img.shields.io/badge/Google%20Apps%20Script-Custom%20Functions-4285F4.svg)](https://developers.google.com/apps-script)
+[![Google Apps Script](https://img.shields.io/badge/Google%20Apps%20Script-4285F4.svg)](https://developers.google.com/apps-script)
 
 [日本語](README.ja.md)
 
-Google Sheets custom functions for Japanese data validation — built from the [apps-script-fleet](https://github.com/h13/apps-script-fleet) template.
+**Google Sheets custom functions for Japanese data validation — email, phone number, and postal code.**
+
+Built from [apps-script-fleet](https://github.com/h13/apps-script-fleet) template.
 
 ## Available Functions
 
-| Function | Description | Example |
-|----------|-------------|---------|
-| `=IS_VALID_EMAIL(value)` | Validates email address format | `=IS_VALID_EMAIL(A1)` |
-| `=IS_VALID_PHONE_JP(value)` | Validates Japanese phone number format (landline, mobile, toll-free) | `=IS_VALID_PHONE_JP(B1)` |
-| `=IS_VALID_POSTAL_CODE(value)` | Validates Japanese postal code format (with or without hyphen) | `=IS_VALID_POSTAL_CODE(C1)` |
+| Function                       | Description                                                          | Example                     |
+| ------------------------------ | -------------------------------------------------------------------- | --------------------------- |
+| `=IS_VALID_EMAIL(value)`       | Validates email address format                                       | `=IS_VALID_EMAIL(A1)`       |
+| `=IS_VALID_PHONE_JP(value)`    | Validates Japanese phone number format (landline, mobile, toll-free) | `=IS_VALID_PHONE_JP(B1)`    |
+| `=IS_VALID_POSTAL_CODE(value)` | Validates Japanese postal code format (with or without hyphen)       | `=IS_VALID_POSTAL_CODE(C1)` |
 
 ## Usage Examples
 
@@ -36,29 +38,34 @@ Enter the following formulas in spreadsheet cells:
 =IS_VALID_POSTAL_CODE("123-456")         -> FALSE
 ```
 
-## Setup
+## Apps Script Projects
 
-1. Clone this repository (or generate from the [apps-script-fleet](https://github.com/h13/apps-script-fleet) template)
-2. Create a Google Apps Script project and obtain its `scriptId`
-3. Set the `scriptId` in `.clasp-dev.json` and `.clasp-prod.json`:
-   ```json
-   { "scriptId": "YOUR_SCRIPT_ID_HERE" }
-   ```
-4. Set the `CLASPRC_JSON` secret in your GitHub repository or at the organization level
-5. Run `pnpm run deploy` to deploy
+| Environment | Link                                                                                                                |
+| ----------- | ------------------------------------------------------------------------------------------------------------------- |
+| dev         | [custom-functions-dev](https://script.google.com/d/1tu6F2RRcjnmmeA-5GyRTD51eXOO6O7qlEuNSe9jr48H_T8ehUV1aQN00/edit)  |
+| prod        | [custom-functions-prod](https://script.google.com/d/1gXPZE_wfAOXPLG6-gpoS5pB7w4Vwe3ERtk6NF14oLh1a_K6Ocm9I1l4I/edit) |
 
-## Development Commands
+## Quick Start
 
-| Command | Description |
-|---------|-------------|
-| `pnpm run check` | Run lint + typecheck + test all at once |
-| `pnpm run test` | Run Jest with coverage |
-| `pnpm run test -- --watch` | Jest watch mode |
-| `pnpm run build` | Bundle TypeScript and output to `dist/` |
-| `pnpm run deploy` | check -> build -> deploy to dev environment |
-| `pnpm run deploy:prod` | check -> build -> deploy to production |
+### 1. Create a Google Apps Script Project
 
-**Requirements**: Node.js >= 24, pnpm
+Open [Google Apps Script](https://script.google.com) → create a new project → copy the `scriptId` from the project URL.
+
+### 2. Configure clasp
+
+Set the `scriptId` in `.clasp-dev.json` and `.clasp-prod.json`:
+
+```json
+{ "scriptId": "YOUR_SCRIPT_ID_HERE" }
+```
+
+### 3. Set CI/CD Secret
+
+Set the `CLASPRC_JSON` secret in your GitHub repository or at the organization level.
+
+### 4. Deploy
+
+Run `pnpm run deploy` to deploy to the dev environment.
 
 ## Project Structure
 
@@ -70,35 +77,26 @@ test/
 └── validators.test.ts  # Unit tests (100% coverage)
 ```
 
-- `src/index.ts`: Defines GAS custom functions. No `export` keyword (GAS runtime does not support ES module syntax).
-- `src/validators.ts`: Implements business logic as pure functions, fully testable in Node.js.
+## Development
+
+| Command                    | Description                             |
+| -------------------------- | --------------------------------------- |
+| `pnpm run check`           | lint + typecheck + test (all checks)    |
+| `pnpm run build`           | Bundle TypeScript and output to `dist/` |
+| `pnpm run test`            | Jest with coverage                      |
+| `pnpm run test -- --watch` | Jest watch mode                         |
+| `pnpm run deploy`          | check → build → deploy to dev           |
+| `pnpm run deploy:prod`     | check → build → deploy to production    |
+
+## CI/CD
+
+CI runs on every push and PR. CD deploys on merge to `dev` or `main` — configured via GitHub Actions secrets/variables per environment. See [apps-script-fleet docs](https://github.com/h13/apps-script-fleet#cicd-pipeline) for details.
 
 ## Notes
 
-- GAS entry point functions in `src/index.ts` must not use the `export` keyword. The GAS runtime does not understand ES module syntax and will error on `clasp push`.
-- `src/index.ts` is excluded from Jest coverage because GAS globals such as `HtmlService` cannot run in Node.js.
-- Coverage threshold is set to 80% for all metrics in `jest.config.json`. For a project of this scope (5-10 functions), raising it to 100% is realistic.
-
-## Generated From
-
-This project was generated from the [h13/apps-script-fleet](https://github.com/h13/apps-script-fleet) template, which provides:
-
-- TypeScript strict mode
-- Rollup bundler (GAS-compatible output)
-- Jest tests (80% coverage threshold)
-- ESLint / Prettier / Stylelint / HTMLHint
-- GitHub Actions + GitLab CI/CD
-- Renovate for automated dependency updates
-- Template sync workflow
-
-## Apps Script Projects
-
-These projects are publicly viewable:
-
-| Environment | Link |
-|-------------|------|
-| Development | [Open in Apps Script](https://script.google.com/d/1tu6F2RRcjnmmeA-5GyRTD51eXOO6O7qlEuNSe9jr48H_T8ehUV1aQN00/edit) |
-| Production  | [Open in Apps Script](https://script.google.com/d/1gXPZE_wfAOXPLG6-gpoS5pB7w4Vwe3ERtk6NF14oLh1a_K6Ocm9I1l4I/edit) |
+- Functions in `src/index.ts` must not have the `export` keyword — the GAS runtime does not support ES module syntax
+- `src/index.ts` is excluded from test coverage (GAS globals cannot run in Node.js)
+- Coverage threshold: 80% for all metrics (configurable in `jest.config.json`)
 
 ## License
 
