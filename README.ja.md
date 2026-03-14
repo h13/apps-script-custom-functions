@@ -93,6 +93,15 @@ test/
 - Renovate による依存関係自動更新
 - テンプレート同期ワークフロー
 
+## Apps Script プロジェクト
+
+これらのプロジェクトは閲覧可能です:
+
+| 環境 | リンク |
+|------|--------|
+| Development | [Apps Script で開く](https://script.google.com/d/1tu6F2RRcjnmmeA-5GyRTD51eXOO6O7qlEuNSe9jr48H_T8ehUV1aQN00/edit) |
+| Production  | [Apps Script で開く](https://script.google.com/d/1gXPZE_wfAOXPLG6-gpoS5pB7w4Vwe3ERtk6NF14oLh1a_K6Ocm9I1l4I/edit) |
+
 ## ライセンス
 
 [MIT](LICENSE)

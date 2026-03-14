@@ -91,6 +91,15 @@ This project was generated from the [h13/apps-script-fleet](https://github.com/h
 - Renovate for automated dependency updates
 - Template sync workflow
 
+## Apps Script Projects
+
+These projects are publicly viewable:
+
+| Environment | Link |
+|-------------|------|
+| Development | [Open in Apps Script](https://script.google.com/d/1tu6F2RRcjnmmeA-5GyRTD51eXOO6O7qlEuNSe9jr48H_T8ehUV1aQN00/edit) |
+| Production  | [Open in Apps Script](https://script.google.com/d/1gXPZE_wfAOXPLG6-gpoS5pB7w4Vwe3ERtk6NF14oLh1a_K6Ocm9I1l4I/edit) |
+
 ## License
 
 [MIT](LICENSE)
