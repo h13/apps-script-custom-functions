@@ -1,6 +1,8 @@
 {
-  "preset": "ts-jest",
   "testEnvironment": "node",
+  "transform": {
+    "^.+\\.tsx?$": ["@swc/jest"]
+  },
   "modulePathIgnorePatterns": ["<rootDir>/dist/", "<rootDir>/build/"],
   "testPathIgnorePatterns": ["<rootDir>/dist/", "<rootDir>/build/"],
   "moduleNameMapper": {
