@@ -1,8 +1,4 @@
-import {
-  isValidEmail,
-  isValidPhoneJp,
-  isValidPostalCode,
-} from './validators.js';
+import { isValidEmail, isValidPhoneJp, isValidPostalCode } from './validators';
 
 function IS_VALID_EMAIL(value: string): boolean {
   return isValidEmail(value);
