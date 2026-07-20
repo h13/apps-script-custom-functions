@@ -1,12 +1,12 @@
 export function isValidEmail(value: string): boolean {
-  if (value === "") return false;
+  if (value === '') return false;
   const pattern =
     /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?)*\.[a-zA-Z]{2,}$/;
   return pattern.test(value);
 }
 
 export function isValidPhoneJp(value: string): boolean {
-  if (value === "") return false;
+  if (value === '') return false;
   const patterns = [
     /^0\d-\d{4}-\d{4}$/, // 固定電話（2桁市外局番）: 03-1234-5678
     /^0\d{9}$/, // 固定電話（ハイフンなし）: 0312345678
@@ -20,7 +20,7 @@ export function isValidPhoneJp(value: string): boolean {
 }
 
 export function isValidPostalCode(value: string): boolean {
-  if (value === "") return false;
+  if (value === '') return false;
   const pattern = /^\d{3}-?\d{4}$/;
   return pattern.test(value);
 }
